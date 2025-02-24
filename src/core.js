@@ -55,6 +55,8 @@ export function isValidUsername(username) {
   const minLength = 5;
   const maxLength = 15;
 
+  if (!username) return false;
+
   return username.length >= minLength && username.length <= maxLength;
 }
 
@@ -67,13 +69,15 @@ export function canDrive(age, countryCode) {
 
   if (!legalDrivingAge[countryCode]) {
     return "Invalid country code";
+  } else if (!age) {
+    return "Invalid age";
   }
-
   return age >= legalDrivingAge[countryCode];
 }
 
 // Lesson: Testing asynchronous code
 export function fetchData() {
+  return Promise.reject({ reason: "Failed operation" });
   return new Promise((resolve) => {
     setTimeout(() => {
       const data = [1, 2, 3];
